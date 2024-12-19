@@ -1,5 +1,5 @@
-import { Photos } from './pages/Photos';
-import { ExternalLink } from 'lucide-react';
+import { Comments } from './pages/Comments';
+import { ArrowSquareOut } from '@phosphor-icons/react';
 
 function App() {
    return (
@@ -9,7 +9,7 @@ function App() {
                <h1 className='bg-zinc-400 text-zinc-950 text-4xl max-sm:text-3xl font-medium p-2 my-2 text-center rounded-lg'>
                   Infinite scroll com React
                </h1>
-               <Photos />
+               <Comments />
             </div>
          </main>
          <footer>
@@ -19,10 +19,10 @@ function App() {
                   href='https://github.com/philipeoliveira'
                   title='Abrir em nova aba o GitHub do autor Philipe Oliveira'
                   target='_blank'
-                  className='flex gap-1'
+                  className='flex items-center gap-1'
                >
                   Philipe Oliveira
-                  <ExternalLink strokeWidth={1.5} size={16} />
+                  <ArrowSquareOut size={14} />
                </a>
             </p>
          </footer>
