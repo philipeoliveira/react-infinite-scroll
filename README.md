@@ -9,7 +9,6 @@ Bibliotecas:
 -  TanStack Query
 -  Axios
 -  Tailwind CSS
--  Tailwind Merge
 -  Phosphor (ícones)
 
 _Obs.: Criado com a base da instalação do React com o Vite._
