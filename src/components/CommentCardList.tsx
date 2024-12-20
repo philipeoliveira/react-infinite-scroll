@@ -45,9 +45,12 @@ export function CommentCardList() {
             <div className='flex flex-col items-center justify-center gap-2 text-center mt-5'>
                <p>Todos os comentários foram carregados.</p>
                <p>
-                  <a href='#topo' className='flex items-center gap-2 hover:underline'>
+                  <button
+                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                     className='flex items-center gap-2 hover:underline'
+                  >
                      Voltar para o topo <ArrowElbowRightUp size={16} />
-                  </a>
+                  </button>
                </p>
             </div>
          )}
