@@ -1,9 +1,18 @@
-import { Spinner } from '@phosphor-icons/react';
+import { useMemo } from 'react';
 import { useCommentsApi } from '../services/useCommentsApi';
+import { InfiniteScrollObserver } from './InfiniteScrollObserver';
 import { CommentCard } from './CommentCard';
+import { ArrowElbowRightUp, Spinner } from '@phosphor-icons/react';
 
 export function CommentCardList() {
-   const { data, isLoading, isError, error } = useCommentsApi();
+   const { data, isLoading, isError, error, hasNextPage, fetchNextPage } =
+      useCommentsApi();
+
+   const comments = useMemo(() => {
+      return data?.pages.reduce((acc, page) => {
+         return [...acc, ...page];
+      });
+   }, [data]);
 
    if (isLoading) {
       return (
@@ -15,7 +24,7 @@ export function CommentCardList() {
    }
 
    if (isError) {
-      console.log(`Erro: ${error.message}`);
+      console.error(`Erro: ${error.message}`);
       return (
          <div className='text-center my-10'>
             <p>Não foi possível se conectar com a API.</p>
@@ -25,11 +34,25 @@ export function CommentCardList() {
    }
 
    return (
-      <div className='grid grid-cols-2 max-md:grid-cols-1 gap-5'>
-         {data &&
-            data.map(({ id, name, email, body }) => (
+      <>
+         <div className='grid grid-cols-2 max-md:grid-cols-1 gap-5'>
+            {comments?.map(({ id, name, email, body }) => (
                <CommentCard key={id} id={id} name={name} email={email} body={body} />
             ))}
-      </div>
+         </div>
+
+         {!hasNextPage && (
+            <div className='flex flex-col items-center justify-center gap-2 text-center mt-5'>
+               <p>Todos os comentários foram carregados.</p>
+               <p>
+                  <a href='#topo' className='flex items-center gap-2 hover:underline'>
+                     Voltar para o topo <ArrowElbowRightUp size={16} />
+                  </a>
+               </p>
+            </div>
+         )}
+
+         <InfiniteScrollObserver callback={fetchNextPage} />
+      </>
    );
 }
