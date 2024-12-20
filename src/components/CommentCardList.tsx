@@ -47,7 +47,7 @@ export function CommentCardList() {
                <p>
                   <button
                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                     className='flex items-center gap-2 hover:underline'
+                     className='flex items-center gap-2 hover:underline focus:outline-none'
                   >
                      Voltar para o topo <ArrowElbowRightUp size={16} />
                   </button>
